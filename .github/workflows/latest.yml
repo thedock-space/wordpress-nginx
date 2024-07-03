@@ -25,5 +25,5 @@ jobs:
         with:
           context: next
           push: true
-          tags: dacdevops/artilleriet:main
+          tags: dacdevops/wordpress-nginx:main
           file: Dockerfile
