@@ -2,9 +2,9 @@ name: docker-artilleriet
 
 on:
   push:
-    branches: "latest"
+    branches: "main"
   pull_request:
-    branches: "latest"
+    branches: "main"
 
   workflow_dispatch:
 
@@ -25,5 +25,5 @@ jobs:
         with:
           context: next
           push: true
-          tags: dacdevops/artilleriet:latest
+          tags: dacdevops/artilleriet:main
           file: Dockerfile
