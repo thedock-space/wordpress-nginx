@@ -1,33 +1,41 @@
-# Copyright Broadcom, Inc. All Rights Reserved.
-# SPDX-License-Identifier: APACHE-2.0
-
-version: '2'
+version: '3.8'
 services:
   mariadb:
-    image: docker.io/bitnami/mariadb:11.3
+    image: 'bitnami/mariadb'
     volumes:
       - 'mariadb_data:/bitnami/mariadb'
     environment:
-      # ALLOW_EMPTY_PASSWORD is recommended only for development.
-      - ALLOW_EMPTY_PASSWORD=yes
       - MARIADB_USER=bn_wordpress
       - MARIADB_DATABASE=bitnami_wordpress
+      - MARIADB_PASSWORD=3RFTzI71P%btPi9y4#D8
+      - ALLOW_EMPTY_PASSWORD=no
+      - MARIADB_ROOT_PASSWORD=^91L99TP7IiNCPxk%nj8
+  memcached:
+    image: docker.io/bitnami/memcached
   wordpress:
-    image: docker.io/bitnami/wordpress-nginx:6
+    image: 'quay.io/shesselink81/wordpress-nginx:v6.3.0.6'
     ports:
-      - '80:8080'
       - '443:8443'
+      - '80:8080'
     volumes:
       - 'wordpress_data:/bitnami/wordpress'
     depends_on:
       - mariadb
+      - memcached
     environment:
-      # ALLOW_EMPTY_PASSWORD is recommended only for development.
-      - ALLOW_EMPTY_PASSWORD=yes
-      - WORDPRESS_DATABASE_HOST=mariadb
-      - WORDPRESS_DATABASE_PORT_NUMBER=3306
+      - MARIADB_HOST=mariadb
+      - MARIADB_PORT_NUMBER=3306
+      - WORDPRESS_USER=user
+      - WORDPRESS_PASSWORD=fW4URJ*rT9PrP!OA@U@M
       - WORDPRESS_DATABASE_USER=bn_wordpress
+      - WORDPRESS_DATABASE_PASSWORD=3RFTzI71P%btPi9y4#D8
       - WORDPRESS_DATABASE_NAME=bitnami_wordpress
+      - ALLOW_EMPTY_PASSWORD=no
+      - WORDPRESS_ENABLE_HTTPS=yes
+      - WORDPRESS_SCHEME=https
+      - WORDPRESS_AUTO_UPDATE_LEVEL=minor
+      - NGINX_HTTPS_PORT_NUMBER=8443
+      - NGINX_HTTP_PORT_NUMBER=8080
 volumes:
   mariadb_data:
     driver: local
