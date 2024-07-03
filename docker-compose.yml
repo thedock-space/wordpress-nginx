@@ -13,7 +13,7 @@ services:
   memcached:
     image: docker.io/bitnami/memcached
   wordpress:
-    image: 'quay.io/shesselink81/wordpress-nginx:v6.3.0.6'
+    image: 'docker.io/dacdevops/wordpress-nginx:main'
     ports:
       - '443:8443'
       - '80:8080'

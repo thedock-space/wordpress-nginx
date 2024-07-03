@@ -1,4 +1,4 @@
-docker build -f .\DockerfileAlpine --no-cache -t quay.io/shesselink81/wordpress-nginx:alpine-v6.3.0.4 .
+docker build -f .\DockerfileAlpine --no-cache -t docker.io/dacdevops/wordpress-nginx:main .
 docker compose -f .\docker-compose-alpine.yml up -d
 
 cd /usr/html
