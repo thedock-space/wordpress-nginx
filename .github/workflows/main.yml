@@ -23,6 +23,7 @@ jobs:
       - name: Build and Push to Docker Hub
         uses: docker/build-push-action@v2
         with:
+          context: 6/debian-12
           push: true
           file: 6/debian-12/Dockerfile
           tags: dacdevops/wordpress-nginx:main
