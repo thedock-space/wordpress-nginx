@@ -17,6 +17,7 @@ LABEL com.vmware.cp.artifact.flavor="sha256:c50c90cfd9d12b445b011e6ad529f1ad3dae
       org.opencontainers.image.vendor="Broadcom, Inc." \
       org.opencontainers.image.version="6.6.2"
 
+ENV TZ="Europe/Stockholm"
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
     OS_FLAVOUR="debian-12" \
