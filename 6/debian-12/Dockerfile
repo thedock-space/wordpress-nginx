@@ -50,6 +50,13 @@ RUN apt-get autoremove --purge -y curl && \
 RUN chmod g+rwX /opt/bitnami
 RUN find / -perm /6000 -type f -exec chmod a-s {} \; || true
 
+# Configure OpenSSH Server
+RUN mkdir /run/sshd && \
+    echo 'root:password' | chpasswd && \
+    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
+    sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
+
 COPY rootfs /
 RUN /opt/bitnami/scripts/mysql-client/postunpack.sh
 RUN /opt/bitnami/scripts/nginx/postunpack.sh
@@ -66,4 +73,4 @@ EXPOSE 8080 8443 2222
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/wordpress/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/nginx-php-fpm/run.sh" ]
+CMD [ "/opt/bitnami/scripts/nginx-php-fpm/run.sh", "/usr/sbin/sshd", "-D" ]
