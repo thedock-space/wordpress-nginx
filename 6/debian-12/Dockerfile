@@ -73,4 +73,4 @@ EXPOSE 8080 8443 2222
 
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/wordpress/entrypoint.sh" ]
-CMD [ "/opt/bitnami/scripts/nginx-php-fpm/run.sh", "/usr/sbin/sshd", "-D" ]
+CMD [ "/opt/bitnami/scripts/nginx-php-fpm/run.sh" ]
